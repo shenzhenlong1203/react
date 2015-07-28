@@ -23,22 +23,13 @@ fakeDataDAO.prototype.save = function(obj, callback) {
 
 //获取列表信息
 fakeDataDAO.prototype.getFakeDataList = function(query, callback) {
-
-    var data = '';
-    fakeData.find(query, function(err, res){
-        if (err) {
-            console.log(err.message);
-        }
-        //console.log(res);
-        data += res;
-    });
-    return data;
+    fakeData.find(query, '-_id -__v', {}, callback);
 };
 
 //获取单条信息
 fakeDataDAO.prototype.getFakeData = function(query, callback) {
 
-    fakeData.findOne(query, function(err, res){
+    fakeData.findOne(query, '-_id -__v', {},  function(err, res){
         if (err) {
             console.log(err.message);
         }

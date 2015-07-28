@@ -21,25 +21,13 @@ ColumnMetaDAO.prototype.save = function(obj, callback) {
 //获取列表信息
 ColumnMetaDAO.prototype.getColumnMetaList = function(query, callback) {
 
-    ColumnMeta.find(query, function(err, res){
-        if (err) {
-            console.log(err.message);
-        }
-        //console.log(res);
-        return res;
-    });
+    ColumnMeta.find(query, '-_id -__v', {}, callback);
 };
 
 //获取单条信息
 ColumnMetaDAO.prototype.getColumnMeta = function(query, callback) {
 
-    ColumnMeta.findOne(query, function(err, res){
-        if (err) {
-            console.log(err.message);
-        }
-        //console.log(res);
-        return res;
-    });
+    ColumnMeta.findOne(query, '-_id -__v', {}, callback);
 };
 
 
