@@ -6,8 +6,10 @@ var columnMetaController = require('./../../models/columnMeta');
 var fakeDataController = require('./../../models/fakeData');
 /* create factory with griddle component */
 var Griddle = React.createFactory(require('griddle-react'));
-//var ReactApp;
-
+var temp1 = require('./../data/columnMeta').columnMeta;
+var temp2 = require('./../data/fakeData').fakeData;
+var fakeData;
+var columnMeta;
 async.parallel({
     fakeData : function(callback) {
         setTimeout(function () {
@@ -24,27 +26,10 @@ async.parallel({
         if (err) {
             console.log(err.message);
         }
-        var fakeData = JSON.parse("{ \"fakeData\" :" + JSON.stringify(results.fakeData) + "}");
-        var columnMeta = JSON.parse("{ \"columnMeta\" :" + JSON.stringify(results.columnMeta) + "}");
-        var resultsPerPage = 100;
-        module.exports = React.createClass({
-            componentDidMount: function () {
-                console.log(JSON.stringify(results.fakeData));
-            },
-            render: function () {
-                return (
-                    <div id="table-area">
-
-                        <Griddle results={fakeData}
-                                 columnMetadata={columnMeta}
-                                 resultsPerPage={resultsPerPage}
-                                 tableClassName="table"/>
-
-                    </div>
-                )
-            }
-        });
+        fakeData = JSON.parse("{ \"fakeData\" :" + JSON.stringify(results.fakeData) + "}").fakeData;
+        columnMeta = JSON.parse("{ \"columnMeta\" :" + JSON.stringify(results.columnMeta) + "}").columnMeta;
     }
+
 );
 /*fakeDataController.getFakeDataList({},function(err, fakeData){
     console.log(fakeData);
@@ -54,26 +39,22 @@ columnMetaController.getColumnMetaList({},function(err, columnMeta){
     console.log(columnMeta);
 });*/
 
-
-/*var resultsPerPage = 100;
+var resultsPerPage = 300;
 var ReactApp = React.createClass({
-    componentDidMount: function () {
-        console.log(fakeData);
-    },
-    render: function () {
-        return (
-            <div id="table-area">
+        componentDidMount: function () {
+            console.log(fakeData);
+        },
 
-                <Griddle results={fakeData}
-                         columnMetadata={columnMeta}
-                         resultsPerPage={resultsPerPage}
-                         tableClassName="table"/>
-
-            </div>
-        )
-    }
-});*/
-
-/*
+        render: function () {
+            return (
+                <div id="table-area">
+                    <Griddle results={fakeData}
+                             columnMetadata={columnMeta}
+                             resultsPerPage={resultsPerPage}
+                             tableClassName="table"/>
+                </div>
+            )
+        }
+});
 module.exports = ReactApp;
-*/
+
